@@ -6,6 +6,9 @@ const PORT = process.env.PORT || 5000;
 //CONNECT TO DB
 connectDB();
 
+// INIT MIDDLEWARE
+app.use(express.json({ extended: false }));
+
 // ROUTES
 app.use('/api/users', require('./routes/users'));
 app.use('/api/contacts', require('./routes/contacts'));
