@@ -1,9 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
 
-const Register = () => {
+const Register = props => {
    const alertContext = useContext(AlertContext);
    const { setAlert } = alertContext;
+
+   const authContext = useContext(AuthContext);
+   const { isAuthenticated, singUp, errors, clearErrors } = authContext;
+
+   useEffect(() => {
+      if (isAuthenticated) {
+         props.history.push('/');
+      }
+      if (errors === 'User already exists') {
+         setAlert(errors, 'danger');
+         clearErrors();
+      }
+      // eslint-disable-next-line
+   }, [props.history, isAuthenticated, errors]);
 
    const [user, setUser] = useState({
       name: '',
@@ -23,7 +38,7 @@ const Register = () => {
          setAlert('Please, enter all fields.', 'danger');
       } else if (password !== confirmPassword) {
          setAlert('Passwords do not match.', 'danger');
-      } else console.log('Sing Up submit');
+      } else singUp({ name, email, password });
    };
 
    return (
