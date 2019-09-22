@@ -5,7 +5,6 @@ import ContactContext from '../../context/contact/contactContext';
 
 import ContactItem from './ContactItem';
 import Spinner from '../layout/Spinner';
-import { SIGPIPE } from 'constants';
 
 const Contacts = () => {
    const contactContext = useContext(ContactContext);
@@ -17,7 +16,7 @@ const Contacts = () => {
       // eslint-disable-next-line
    }, []);
 
-   if (contacts.length === 0) {
+   if (contacts !== null && contacts.length === 0 && !loading) {
       return <h4>Please, add a contact</h4>;
    }
 

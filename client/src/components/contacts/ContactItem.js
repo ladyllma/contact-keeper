@@ -7,10 +7,10 @@ const ContactItem = ({ contact }) => {
    const contactContext = useContext(ContactContext);
    const { deleteContact, setCurrent, clearCurrent } = contactContext;
 
-   const { id, name, email, phone, type } = contact;
+   const { _id, name, email, phone, type } = contact;
 
    const onDelete = () => {
-      deleteContact(id);
+      deleteContact(_id);
       clearCurrent();
    };
    return (
@@ -27,7 +27,7 @@ const ContactItem = ({ contact }) => {
                {type}
             </span>
          </h3>
-         <ul>
+         <ul style={{ marginTop: '10px' }}>
             {email && (
                <li>
                   <i className="fas fa-envelope-open" />
@@ -41,7 +41,7 @@ const ContactItem = ({ contact }) => {
                </li>
             )}
          </ul>
-         <p>
+         <p style={{ marginTop: '10px' }}>
             <button
                className="btn btn-dark btn-sm"
                onClick={() => setCurrent(contact)}

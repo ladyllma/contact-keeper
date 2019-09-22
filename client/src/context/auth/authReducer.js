@@ -9,8 +9,6 @@ import {
    CLEAR_ERRORS
 } from '../types';
 
-import React from 'react';
-
 export default (state, action) => {
    switch (action.type) {
       case SIGNUP_SUCCESS:
